@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AprovaIA</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f7ff;
+    color:#222;
+}
+
+header{
+    background:linear-gradient(135deg,#6c3bff,#3f8cff);
+    color:white;
+    padding:25px;
+    border-bottom-left-radius:25px;
+    border-bottom-right-radius:25px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+header h1{
+    font-size:32px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    margin-top:20px;
+}
+
+h2{
+    color:#5b32ff;
+    margin-bottom:15px;
+}
+
+.question{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.option{
+    background:#eef1ff;
+    padding:14px;
+    margin-top:12px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#d8e1ff;
+}
+
+.correct{
+    background:#b7ffcc !important;
+}
+
+.wrong{
+    background:#ffbcbc !important;
+}
+
+#feedback{
+    margin-top:18px;
+    font-weight:bold;
+}
+
+.stats{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.stat-box{
+    flex:1;
+    min-width:180px;
+    background:#ffffff;
+    padding:18px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
+
+.level{
+    margin-top:10px;
+    display:inline-block;
+    background:#ffcc00;
+    padding:6px 14px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 18px;
+    border:none;
+    border-radius:12px;
+    background:#6c3bff;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#5425e2;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 AprovaIA</h1>
+    <p>Questões Inteligentes Adaptativas</p>
+</header>
+
+<div class="container">
+
+    <div class="stats">
+
+        <div class="stat-box">
+            <h3>✅ Acertos</h3>
+            <p id="hits">0</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>❌ Erros</h3>
+            <p id="mistakes">0</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>🎯 Dificuldade</h3>
+            <p id="difficultyText">Fácil</p>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>🧠 Questão Adaptativa</h2>
+
+        <div class="level" id="level">
+            Nível Fácil
+        </div>
+
+        <div class="question" id="question">
+        </div>
+
+        <div id="options"></div>
+
+        <p id="feedback"></p>
+
+        <button onclick="nextQuestion()">
+            Próxima Questão
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let hits = 0;
+let mistakes = 0;
+let currentQuestion = {};
+let currentDifficulty = "easy";
+
+const questions = {
+
+    easy:[
+        {
+            question:"Qual planeta é conhecido como planeta vermelho?",
+            options:["Marte","Terra","Júpiter","Saturno"],
+            answer:"Marte"
+        },
+
+        {
+            question:"Quanto é 5 + 3?",
+            options:["6","7","8","9"],
+            answer:"8"
+        },
+
+        {
+            question:"Qual é a capital do Brasil?",
+            options:["Brasília","Rio de Janeiro","São Paulo","Salvador"],
+            answer:"Brasília"
+        }
+    ],
+
+    medium:[
+        {
+            question:"Qual a função da mitocôndria?",
+            options:[
+                "Produzir energia",
+                "Controlar respiração",
+                "Armazenar DNA",
+                "Produzir sangue"
+            ],
+            answer:"Produzir energia"
+        },
+
+        {
+            question:"Quanto é 12 x 8?",
+            options:["82","96","88","102"],
+            answer:"96"
+        },
+
+        {
+            question:"Quem escreveu Dom Casmurro?",
+            options:[
+                "Machado de Assis",
+                "Clarice Lispector",
+                "José de Alencar",
+                "Carlos Drummond"
+            ],
+            answer:"Machado de Assis"
+        }
+    ],
+
+    hard:[
+        {
+            question:"Qual é a principal função do RNA mensageiro?",
+            options:[
+                "Transportar informação genética",
+                "Produzir energia",
+                "Controlar hormônios",
+                "Defender o organismo"
+            ],
+            answer:"Transportar informação genética"
+        },
+
+        {
+            question:"Quanto é a raiz quadrada de 625?",
+            options:["20","22","25","30"],
+            answer:"25"
+        },
+
+        {
+            question:"Qual filósofo escreveu 'A República'?",
+            options:[
+                "Platão",
+                "Aristóteles",
+                "Sócrates",
+                "Descartes"
+            ],
+            answer:"Platão"
+        }
+    ]
+};
+
+function loadQuestion(){
+
+    let list = questions[currentDifficulty];
+
+    currentQuestion =
+    list[Math.floor(Math.random() * list.length)];
+
+    document.getElementById("question").innerHTML =
+    currentQuestion.question;
+
+    let optionsHTML = "";
+
+    currentQuestion.options.forEach(option => {
+
+        optionsHTML += `
+            <div class="option" onclick="checkAnswer(this,'${option}')">
+                ${option}
+            </div>
+        `;
+    });
+
+    document.getElementById("options").innerHTML =
+    optionsHTML;
+
+    document.getElementById("feedback").innerHTML = "";
+}
+
+function checkAnswer(element,selected){
+
+    let allOptions =
+    document.querySelectorAll(".option");
+
+    allOptions.forEach(option => {
+        option.style.pointerEvents = "none";
+    });
+
+    if(selected === currentQuestion.answer){
+
+        element.classList.add("correct");
+
+        hits++;
+
+        document.getElementById("hits").innerHTML = hits;
+
+        document.getElementById("feedback").innerHTML =
+        "✅ Muito bem! Você acertou.";
+
+        increaseDifficulty();
+
+    }else{
+
+        element.classList.add("wrong");
+
+        mistakes++;
+
+        document.getElementById("mistakes").innerHTML =
+        mistakes;
+
+        document.getElementById("feedback").innerHTML =
+        "❌ Você errou. A resposta correta é: "
+        + currentQuestion.answer;
+
+        decreaseDifficulty();
+    }
+}
+
+function increaseDifficulty(){
+
+    if(hits >= 2 && currentDifficulty === "easy"){
+
+        currentDifficulty = "medium";
+
+        updateDifficulty();
+    }
+
+    if(hits >= 5 && currentDifficulty === "medium"){
+
+        currentDifficulty = "hard";
+
+        updateDifficulty();
+    }
+}
+
+function decreaseDifficulty(){
+
+    if(mistakes >= 2 && currentDifficulty === "hard"){
+
+        currentDifficulty = "medium";
+
+        updateDifficulty();
+    }
+
+    if(mistakes >= 4 && currentDifficulty === "medium"){
+
+        currentDifficulty = "easy";
+
+        updateDifficulty();
+    }
+}
+
+function updateDifficulty(){
+
+    let text = "";
+    let level = "";
+
+    if(currentDifficulty === "easy"){
+        text = "Fácil";
+        level = "Nível Fácil";
+    }
+
+    if(currentDifficulty === "medium"){
+        text = "Médio";
+        level = "Nível Médio";
+    }
+
+    if(currentDifficulty === "hard"){
+        text = "Difícil";
+        level = "Nível Difícil";
+    }
+
+    document.getElementById("difficultyText").innerHTML =
+    text;
+
+    document.getElementById("level").innerHTML =
+    level;
+}
+
+function nextQuestion(){
+
+    loadQuestion();
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
