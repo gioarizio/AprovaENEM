@@ -16,71 +16,35 @@
 }
 
 body{
-    background:#f4f7ff;
+    background:linear-gradient(180deg,#eef3ff,#f7f9ff);
     color:#222;
+    min-height:100vh;
 }
 
 header{
     background:linear-gradient(135deg,#6c3bff,#3f8cff);
     color:white;
-    padding:25px;
-    border-bottom-left-radius:25px;
-    border-bottom-right-radius:25px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    padding:30px;
+    border-bottom-left-radius:30px;
+    border-bottom-right-radius:30px;
+    box-shadow:0 4px 18px rgba(0,0,0,0.18);
+    text-align:center;
 }
 
 header h1{
-    font-size:32px;
+    font-size:36px;
+    margin-bottom:8px;
+}
+
+header p{
+    opacity:0.9;
+    font-size:17px;
 }
 
 .container{
-    max-width:1000px;
+    max-width:1050px;
     margin:auto;
     padding:20px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.08);
-    margin-top:20px;
-}
-
-h2{
-    color:#5b32ff;
-    margin-bottom:15px;
-}
-
-.question{
-    font-size:20px;
-    margin-bottom:20px;
-}
-
-.option{
-    background:#eef1ff;
-    padding:14px;
-    margin-top:12px;
-    border-radius:12px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.option:hover{
-    background:#d8e1ff;
-}
-
-.correct{
-    background:#b7ffcc !important;
-}
-
-.wrong{
-    background:#ffbcbc !important;
-}
-
-#feedback{
-    margin-top:18px;
-    font-weight:bold;
 }
 
 .stats{
@@ -93,34 +57,184 @@ h2{
 .stat-box{
     flex:1;
     min-width:180px;
-    background:#ffffff;
-    padding:18px;
-    border-radius:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.06);
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    transition:0.3s;
 }
 
-.level{
-    margin-top:10px;
-    display:inline-block;
-    background:#ffcc00;
-    padding:6px 14px;
-    border-radius:20px;
+.stat-box:hover{
+    transform:translateY(-3px);
+}
+
+.stat-box h3{
+    color:#5b32ff;
+    margin-bottom:10px;
+}
+
+.stat-box p{
+    font-size:28px;
     font-weight:bold;
 }
 
-button{
+.card{
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 4px 18px rgba(0,0,0,0.08);
+    margin-top:25px;
+}
+
+h2{
+    color:#5b32ff;
+    margin-bottom:15px;
+}
+
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.level{
+    padding:8px 18px;
+    border-radius:25px;
+    font-weight:bold;
+    color:white;
+    font-size:15px;
+}
+
+.easy-level{
+    background:#2ecc71;
+}
+
+.medium-level{
+    background:#f39c12;
+}
+
+.hard-level{
+    background:#e74c3c;
+}
+
+.question{
+    font-size:24px;
+    margin:30px 0 20px;
+    font-weight:bold;
+    line-height:1.4;
+}
+
+.option{
+    background:#eef1ff;
+    padding:16px;
+    margin-top:14px;
+    border-radius:14px;
+    cursor:pointer;
+    transition:0.25s;
+    border:2px solid transparent;
+    font-size:17px;
+}
+
+.option:hover{
+    background:#dfe7ff;
+    border-color:#6c3bff;
+    transform:scale(1.01);
+}
+
+.correct{
+    background:#b7ffcc !important;
+    border-color:#27ae60 !important;
+}
+
+.wrong{
+    background:#ffbcbc !important;
+    border-color:#e74c3c !important;
+}
+
+#feedback{
     margin-top:20px;
-    padding:12px 18px;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+button{
+    padding:13px 22px;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
     background:#6c3bff;
     color:white;
     cursor:pointer;
     font-weight:bold;
+    transition:0.3s;
+    font-size:15px;
 }
 
 button:hover{
     background:#5425e2;
+    transform:translateY(-2px);
+}
+
+.select-level{
+    padding:10px 14px;
+    border-radius:12px;
+    border:2px solid #d9ddff;
+    font-size:15px;
+    font-weight:bold;
+    outline:none;
+}
+
+.progress-area{
+    margin-top:25px;
+}
+
+.progress-title{
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.progress-bar{
+    width:100%;
+    height:18px;
+    background:#e6e9ff;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#6c3bff,#3f8cff);
+    transition:0.4s;
+}
+
+footer{
+    text-align:center;
+    margin-top:40px;
+    padding:20px;
+    color:#666;
+    font-size:14px;
+}
+
+@media(max-width:700px){
+
+    .question{
+        font-size:20px;
+    }
+
+    .top-bar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
 }
 
 </style>
@@ -156,37 +270,77 @@ button:hover{
 
     <div class="card">
 
-        <h2>🧠 Questão Adaptativa</h2>
+        <div class="top-bar">
 
-        <div class="level" id="level">
-            Nível Fácil
+            <h2>🧠 Questão Adaptativa</h2>
+
+            <div class="level easy-level" id="level">
+                Nível Fácil
+            </div>
+
         </div>
 
-        <div class="question" id="question">
-        </div>
+        <br>
+
+        <label><strong>Escolha o nível:</strong></label>
+
+        <select class="select-level" onchange="changeDifficulty(this.value)">
+            <option value="easy">🟢 Fácil</option>
+            <option value="medium">🟠 Médio</option>
+            <option value="hard">🔴 Difícil</option>
+        </select>
+
+        <div class="question" id="question"></div>
 
         <div id="options"></div>
 
         <p id="feedback"></p>
 
-        <button onclick="nextQuestion()">
-            Próxima Questão
-        </button>
+        <div class="progress-area">
+
+            <div class="progress-title">
+                📈 Progresso
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <button onclick="nextQuestion()">
+                Próxima Questão
+            </button>
+
+            <button onclick="resetGame()">
+                Reiniciar
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
+<footer>
+    Desenvolvido com ❤️ para estudos inteligentes
+</footer>
+
 <script>
 
 let hits = 0;
 let mistakes = 0;
+let totalAnswered = 0;
+
 let currentQuestion = {};
 let currentDifficulty = "easy";
 
 const questions = {
 
     easy:[
+
         {
             question:"Qual planeta é conhecido como planeta vermelho?",
             options:["Marte","Terra","Júpiter","Saturno"],
@@ -204,9 +358,11 @@ const questions = {
             options:["Brasília","Rio de Janeiro","São Paulo","Salvador"],
             answer:"Brasília"
         }
+
     ],
 
     medium:[
+
         {
             question:"Qual a função da mitocôndria?",
             options:[
@@ -234,9 +390,11 @@ const questions = {
             ],
             answer:"Machado de Assis"
         }
+
     ],
 
     hard:[
+
         {
             question:"Qual é a principal função do RNA mensageiro?",
             options:[
@@ -264,6 +422,7 @@ const questions = {
             ],
             answer:"Platão"
         }
+
     ]
 };
 
@@ -282,7 +441,8 @@ function loadQuestion(){
     currentQuestion.options.forEach(option => {
 
         optionsHTML += `
-            <div class="option" onclick="checkAnswer(this,'${option}')">
+            <div class="option"
+            onclick="checkAnswer(this,'${option}')">
                 ${option}
             </div>
         `;
@@ -303,18 +463,19 @@ function checkAnswer(element,selected){
         option.style.pointerEvents = "none";
     });
 
+    totalAnswered++;
+
     if(selected === currentQuestion.answer){
 
         element.classList.add("correct");
 
         hits++;
 
-        document.getElementById("hits").innerHTML = hits;
+        document.getElementById("hits").innerHTML =
+        hits;
 
         document.getElementById("feedback").innerHTML =
         "✅ Muito bem! Você acertou.";
-
-        increaseDifficulty();
 
     }else{
 
@@ -328,76 +489,98 @@ function checkAnswer(element,selected){
         document.getElementById("feedback").innerHTML =
         "❌ Você errou. A resposta correta é: "
         + currentQuestion.answer;
-
-        decreaseDifficulty();
     }
+
+    updateProgress();
 }
 
-function increaseDifficulty(){
+function updateProgress(){
 
-    if(hits >= 2 && currentDifficulty === "easy"){
+    let percentage = totalAnswered * 10;
 
-        currentDifficulty = "medium";
-
-        updateDifficulty();
+    if(percentage > 100){
+        percentage = 100;
     }
 
-    if(hits >= 5 && currentDifficulty === "medium"){
-
-        currentDifficulty = "hard";
-
-        updateDifficulty();
-    }
+    document.getElementById("progress").style.width =
+    percentage + "%";
 }
 
-function decreaseDifficulty(){
+function changeDifficulty(level){
 
-    if(mistakes >= 2 && currentDifficulty === "hard"){
+    currentDifficulty = level;
 
-        currentDifficulty = "medium";
+    updateDifficulty();
 
-        updateDifficulty();
-    }
-
-    if(mistakes >= 4 && currentDifficulty === "medium"){
-
-        currentDifficulty = "easy";
-
-        updateDifficulty();
-    }
+    loadQuestion();
 }
 
 function updateDifficulty(){
 
     let text = "";
-    let level = "";
+    let level = document.getElementById("level");
+
+    level.className = "level";
 
     if(currentDifficulty === "easy"){
+
         text = "Fácil";
-        level = "Nível Fácil";
+
+        level.innerHTML = "Nível Fácil";
+
+        level.classList.add("easy-level");
     }
 
     if(currentDifficulty === "medium"){
+
         text = "Médio";
-        level = "Nível Médio";
+
+        level.innerHTML = "Nível Médio";
+
+        level.classList.add("medium-level");
     }
 
     if(currentDifficulty === "hard"){
+
         text = "Difícil";
-        level = "Nível Difícil";
+
+        level.innerHTML = "Nível Difícil";
+
+        level.classList.add("hard-level");
     }
 
     document.getElementById("difficultyText").innerHTML =
     text;
-
-    document.getElementById("level").innerHTML =
-    level;
 }
 
 function nextQuestion(){
 
     loadQuestion();
 }
+
+function resetGame(){
+
+    hits = 0;
+    mistakes = 0;
+    totalAnswered = 0;
+
+    document.getElementById("hits").innerHTML = 0;
+    document.getElementById("mistakes").innerHTML = 0;
+
+    document.getElementById("progress").style.width =
+    "0%";
+
+    currentDifficulty = "easy";
+
+    updateDifficulty();
+
+    loadQuestion();
+
+    document.getElementById("feedback").innerHTML =
+    "";
+}
+
+updateDifficulty();
 
 loadQuestion();
 
