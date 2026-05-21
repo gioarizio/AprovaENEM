@@ -1,95 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AprovaIA</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Conhecimentos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
-    <h1>📚 AprovaIA</h1>
-    <p>Questões Inteligentes Adaptativas</p>
+    <h1>Quiz de Conhecimentos</h1>
+    <p>Teste seus conhecimentos e suba de nível!</p>
 </header>
 
 <div class="container">
 
     <div class="stats">
-
         <div class="stat-box">
-            <h3>✅ Acertos</h3>
+            <h3>Acertos</h3>
             <p id="hits">0</p>
         </div>
-
         <div class="stat-box">
-            <h3>❌ Erros</h3>
+            <h3>Erros</h3>
             <p id="mistakes">0</p>
         </div>
-
         <div class="stat-box">
-            <h3>🎯 Dificuldade</h3>
-            <p id="difficultyText">Fácil</p>
+            <h3>Respondidas</h3>
+            <p id="total">0</p>
         </div>
-
     </div>
 
     <div class="card">
 
         <div class="top-bar">
-
-            <h2>🧠 Questão Adaptativa</h2>
-
-            <div class="level easy-level" id="level">
-                Nível Fácil
-            </div>
-
+            <span class="level easy-level" id="level">Nível Fácil</span>
+            <select class="select-level" onchange="changeDifficulty(this.value)">
+                <option value="easy">Fácil</option>
+                <option value="medium">Médio</option>
+                <option value="hard">Difícil</option>
+            </select>
         </div>
 
-        <br>
-
-        <label><strong>Escolha o nível:</strong></label>
-
-        <select class="select-level" onchange="changeDifficulty(this.value)">
-            <option value="easy">🟢 Fácil</option>
-            <option value="medium">🟠 Médio</option>
-            <option value="hard">🔴 Difícil</option>
-        </select>
-
         <div class="question" id="question"></div>
-
         <div id="options"></div>
+        <div id="feedback"></div>
 
-        <p id="feedback"></p>
+        <div class="buttons">
+            <button onclick="nextQuestion()">Próxima Pergunta</button>
+            <button onclick="resetGame()">Reiniciar Jogo</button>
+        </div>
 
         <div class="progress-area">
-
-            <div class="progress-title">
-                📈 Progresso
-            </div>
-
+            <div class="progress-title">Progresso: <span id="progTxt">0%</span></div>
             <div class="progress-bar">
                 <div class="progress" id="progress"></div>
             </div>
-
-        </div>
-
-        <div class="buttons">
-
-            <button onclick="nextQuestion()">
-                Próxima Questão
-            </button>
-
-            <button onclick="resetGame()">
-                Reiniciar
-            </button>
-
         </div>
 
     </div>
@@ -97,10 +62,9 @@
 </div>
 
 <footer>
-    Desenvolvido com ❤️ para estudos inteligentes
+    <p>Quiz de Conhecimentos &copy; 2025</p>
 </footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>
