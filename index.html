@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Conhecimentos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Quiz de Conhecimentos</h1>
+    <p>Teste seus conhecimentos e suba de nível!</p>
+</header>
+
+<div class="container">
+
+    <div class="stats">
+        <div class="stat-box">
+            <h3>Acertos</h3>
+            <p id="hits">0</p>
+        </div>
+        <div class="stat-box">
+            <h3>Erros</h3>
+            <p id="mistakes">0</p>
+        </div>
+        <div class="stat-box">
+            <h3>Respondidas</h3>
+            <p id="total">0</p>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="top-bar">
+            <span class="level easy-level" id="level">Nível Fácil</span>
+            <select class="select-level" onchange="changeDifficulty(this.value)">
+                <option value="easy">Fácil</option>
+                <option value="medium">Médio</option>
+                <option value="hard">Difícil</option>
+            </select>
+        </div>
+
+        <div class="question" id="question"></div>
+        <div id="options"></div>
+        <div id="feedback"></div>
+
+        <div class="buttons">
+            <button onclick="nextQuestion()">Próxima Pergunta</button>
+            <button onclick="resetGame()">Reiniciar Jogo</button>
+        </div>
+
+        <div class="progress-area">
+            <div class="progress-title">Progresso: <span id="progTxt">0%</span></div>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>Quiz de Conhecimentos &copy; 2025</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
